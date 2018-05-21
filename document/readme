@@ -1,0 +1,12 @@
+dao方法:
+1.dao接口
+2.dao实现类
+3.配置文件
+
+mapping方法:
+1.mapper接口   (相当于到接口)
+2.配置文件
+会通过 UserMapper userMapper = sqlSession.getMapper(UserMapper.class); 这条语句生成mapping代理对象
+之后用这个对象去调用方法
+
+
