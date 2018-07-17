@@ -22,7 +22,7 @@ public class UserDaoImp implements UserDao {
     @Override
     public User findUserById(int id) {
         SqlSession sq = sqlSessionFactory.openSession();
-        User user = sq.selectOne("dao.findUserById",id);
+        User user = sq.selectOne("mapper.UserMapper.findUserById",id);
         sq.close();
         return user;
     }

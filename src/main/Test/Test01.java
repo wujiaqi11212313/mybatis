@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import po.User;
+
+import javax.jws.soap.SOAPBinding;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -29,6 +31,10 @@ public class Test01 {
         sqlSessionFactory = new SqlSessionFactoryBuilder().build(is);
     }
 
+    /**
+     * 测试原始dao的开发方法
+     */
+
     @Test
     public void TestfindUserById() throws Exception {
         //创建UserDao的对象
@@ -41,8 +47,12 @@ public class Test01 {
     public void TestfindUserByName(){
         UserDao userDao = new UserDaoImp(sqlSessionFactory);
         List<User> list = userDao.findUserByName("tom");
-        System.out.println(list.get(1).getName());
+        System.out.println(list.get(0).getName());
     }
+
+    /**
+     * 测试mapper代理的方法
+     */
 
     @Test
     public void ttt(){
@@ -50,9 +60,11 @@ public class Test01 {
         //创建UserMapper的对象，mybatis自动生成mapper代理对象
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         //调用userMapper的方法
-        List list = userMapper.findUserByName("tom");
-        sqlSession.close();
-        System.out.println(list);
+        List<User> list = userMapper.findUserByName("t");
+        for (User user:list){
+            String name = user.getName();
+            System.out.println(name);
+        }
     }
 
 }
